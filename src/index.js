@@ -7,14 +7,19 @@ const { engine } = require("express-handlebars");
 
 const route = require("./routes");
 const db = require("./config/db");
+require("dotenv").config(); // Đọc biến môi trường từ file .env
 
+const PORT = process.env.PORT || 5000; // Render sẽ cấp PORT
+const MONGO_URI = process.env.MONGODB_URI; // Lấy URI từ Render hoặc file .env
 // Connect to DB
-db.connect();
+// db.connect();
 
 const app = express();
-const port = 5000;
+// const port = 5000;
 
 // Use static folder
+db.connect(MONGO_URI);
+
 app.use(cors());
 app.use(express.static(path.join(__dirname, "public")));
 
@@ -47,6 +52,6 @@ app.use("/uploads", express.static(path.join(__dirname, "./app/uploads")));
 // Routes init
 route(app);
 
-app.listen(port, () =>
-  console.log(`App listening at http://localhost:${port}`)
+app.listen(PORT, () =>
+  console.log(`App listening at http://localhost:${PORT}`)
 );
