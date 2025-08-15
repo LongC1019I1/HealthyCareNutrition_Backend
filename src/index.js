@@ -13,7 +13,7 @@ const PORT = process.env.PORT || 5000; // Render sẽ cấp PORT
 const MONGO_URI = process.env.MONGODB_URI; // Lấy URI từ Render hoặc file .env
 // Connect to DB
 // db.connect();
-
+console.error({ MONGO_URI, PORT });
 const app = express();
 // const port = 5000;
 
